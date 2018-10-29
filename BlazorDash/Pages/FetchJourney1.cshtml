@@ -1,0 +1,76 @@
+﻿@page "/fetchjourney1"
+@inject HttpClient Http
+
+<style>
+    .header {
+        text-align: center;
+        background: #1abc9c;
+        color: white;
+        font-size: 14px;
+    }
+</style>
+
+<h1>Call Journey Through Telecom Touchpoints</h1>
+
+<p>This component demonstrates a vertical slice of contact data flowing through the various Telecom Systemsr.</p>
+<span style="color:red">@notificationMessage</span>
+
+@if (contacts == null)
+{
+<p><em>Loading...</em></p>
+}
+else
+{
+<div class="row page-header header">
+    <div class="col-lg-12">
+            <div class="col-lg-2 text-left">
+                Contact Attributes
+            </div>
+            <div class="row">
+                <div class="col-lg-2 text-left">
+                    Web/Mobile
+                </div>
+                <div class="col-lg-2 text-left">
+                    IVR/TAD
+                </div>
+                <div class="col-lg-4 text-left">
+                    CONNECT CSR1
+                </div>
+                <div class="col-lg-4 text-left">
+                    CONNECT CSR2
+                </div>
+                <div class="col-lg-1 text-left">
+                    ASI External
+                </div>
+            </div>
+    </div>
+</div>
+
+}
+
+@functions {
+    string notificationMessage;
+    IList<ContactContext> contacts;
+
+    protected override async Task OnInitAsync()
+    {
+        try
+        {
+            contacts = await Http.GetJsonAsync<IList<ContactContext>>("sample-data/journey.json");
+        }
+        catch (Exception exception)
+        {
+            notificationMessage = $"Exception Message: {exception.Message}";
+        }
+    }
+
+    class ContactContext
+    {
+        public string ContactAttribute { get; set; }
+        public string WebMobile { get; set; }
+        public string IvrTad { get; set; }
+        public string ConnectCsr1 { get; set; }
+        public string ConnectCsr2 { get; set; }
+        public string AsiExternal { get; set; }
+    }
+}

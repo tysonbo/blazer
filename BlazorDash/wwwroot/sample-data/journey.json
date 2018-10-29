@@ -1,0 +1,82 @@
+﻿[
+  {
+    "ContactAttribute": "ANI",
+    "WebMobile": "440-999-0909",
+    "IvrTad": "440-999-0909",
+    "ConnectCsr1": "440-999-0909",
+    "ContactRouting1": "440-999-0909",
+    "ConnectCsr2": "440-999-0909",
+    "ContactRouting2": "440-999-0909",
+    "AsiExternal": "440-999-0909"
+  },
+  {
+    "ContactAttribute": "Caller Intent",
+    "WebMobile": "Sales",
+    "IvrTad": "Service",
+    "ConnectCsr1": "Service",
+    "ContactRouting1": "Sales",
+    "ConnectCsr2": "Sales",
+    "ContactRouting2": "Home Owners",
+    "AsiExternal": "Home Owners"
+  },
+  {
+    "ContactAttribute": "Product",
+    "WebMobile": "",
+    "IvrTad": "Personal Lines",
+    "ConnectCsr1": "Personal Lines",
+    "ContactRouting1": "Special Lines",
+    "ConnectCsr2": "Special Lines",
+    "ContactRouting2": "Home Advantage",
+    "AsiExternal": "Home Advantage"
+  },
+  {
+    "ContactAttribute": "Risk",
+    "WebMobile": "",
+    "IvrTad": "Auto",
+    "ConnectCsr1": "Auto",
+    "ContactRouting1": "Motor Home",
+    "ConnectCsr2": "Motor Home",
+    "ContactRouting2": "Home",
+    "AsiExternal": "Home"
+  },
+  {
+    "ContactAttribute": "Policy Number",
+    "WebMobile": "",
+    "IvrTad": "123456789",
+    "ConnectCsr1": "111112222",
+    "ContactRouting1": "111112222",
+    "ConnectCsr2": "111112222",
+    "ContactRouting2": "",
+    "AsiExternal": "Should be populated"
+  },
+  {
+    "ContactAttribute": "Date of Birth",
+    "WebMobile": "",
+    "IvrTad": "01/1960",
+    "ConnectCsr1": "01/1960",
+    "ContactRouting1": "01/1960",
+    "ConnectCsr2": "01/1960",
+    "ContactRouting2": "01/1960",
+    "AsiExternal": "01/1960"
+  },
+  {
+    "ContactAttribute": "Caller Verified",
+    "WebMobile": "",
+    "IvrTad": "No",
+    "ConnectCsr1": "Yes",
+    "ContactRouting1": "Yes",
+    "ConnectCsr2": "Yes",
+    "ContactRouting2": "No",
+    "AsiExternal": "No (Should be Yes)"
+  },
+  {
+    "ContactAttribute": "Caller Authenticated",
+    "WebMobile": "",
+    "IvrTad": "Yes",
+    "ConnectCsr1": "Yes",
+    "ContactRouting1": "Yes",
+    "ConnectCsr2": "Yes",
+    "ContactRouting2": "No",
+    "AsiExternal": "No (Should be Yes)"
+  }
+]

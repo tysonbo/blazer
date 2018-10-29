@@ -1,0 +1,68 @@
+﻿@page "/fetchcontactcontext"
+@inject HttpClient Http
+
+<h1>Customer Treatment Details</h1>
+
+<p>This component demonstrates fetching Customer Treatments from a Node JS server.</p>
+<span style="color:red">@notificationMessage</span>
+
+@if (contacts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>ANI</th>
+                <th>Call Reason</th>
+                <th>Quote Number</th>
+                <th>Policy Number</th>
+                <th>Claim Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contact in contacts)
+            {
+                <tr>
+                    <td>@contact.Name</td>
+                    <td><a href="fetchcontactjourney">@contact.ANI</a></td>
+                    <td>@contact.Call_Reason</td>
+                    <td>@contact.Quote_Number</td>
+                    <td>@contact.Policy_Number</td>
+                    <td>@contact.Claim_Number</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+string notificationMessage;
+IList<ContactContext> contacts;
+
+protected override async Task OnInitAsync()
+{
+    try
+    {
+        contacts = await Http.GetJsonAsync<IList<ContactContext>>("https://telecom-dashboard-api.herokuapp.com/calls/");
+    }
+    catch (Exception exception)
+    {
+        notificationMessage = $"Exception Message: {exception.Message}";
+    }
+}
+
+class ContactContext
+{
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public string ANI { get; set; }
+    public string Call_Reason { get; set; }
+    public string Quote_Number { get; set; }
+    public string Policy_Number { get; set; }
+    public string Claim_Number { get; set; }
+}
+}

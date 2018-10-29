@@ -1,0 +1,102 @@
+﻿@page "/fetchcontactjourney"
+@inject HttpClient Http
+
+<style>
+    .header {
+        text-align: left;
+        background: #1abc9c;
+        color: white;
+        font-size: 14px;
+    }
+</style>
+
+<h1>Customer Journey Through Telecom Touchpoints</h1>
+
+<p>Demonstrates a vertical slice of a Customer Treatment aggregated from Telecom Systems.</p>
+<span style="color:red">@notificationMessage</span>
+
+@if (contacts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table" border="1">
+        <thead class="header">
+            <tr>
+                <th>Contact Attributes</th>
+                <th>Web / Mobile<br /><font size="1">(PGR Touchpoint)</font></th>
+                <th>IVR / TAD<br /><font size="1">(Telecom Touchpoint)</font></th>
+                <th>CONNECT CSR1<br /><font size="1">(Telecom Touchpoint)</font></th>
+                <th>Contact Routing</th>
+                <th>CONNECT CSR2</th>
+                <th>Contact Routing</th>
+                <th>ASI Internal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contact in contacts)
+            {
+            <tr>
+                <td>@contact.ContactAttribute</td>
+                <td>@contact.WebMobile</td>
+                <td>@contact.IvrTad</td>
+                <td>@contact.ConnectCsr1</td>
+                <td>@contact.ContactRouting1</td>
+                <td>@contact.ConnectCsr2</td>
+                <td>@contact.ContactRouting2</td>
+                @if (ShouldHighlight(contact.AsiExternal))
+                {
+                    <td><font color="red">@contact.AsiExternal</font></td>
+                }
+                else
+                {
+                    <td>@contact.AsiExternal</td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+    string notificationMessage;
+    IList<ContactContext> contacts;
+
+    protected override async Task OnInitAsync()
+    {
+        try
+        {
+            contacts = await Http.GetJsonAsync<IList<ContactContext>>("sample-data/journey.json");
+        }
+        catch (Exception exception)
+        {
+            notificationMessage = $"Exception Message: {exception.Message}";
+        }
+    }
+
+    private bool ShouldHighlight(string args)
+    {
+        bool highlight = false;
+
+        if ((args.Equals("No (Should be Yes)", StringComparison.OrdinalIgnoreCase)) ||
+                (args.Equals("Should be populated", StringComparison.OrdinalIgnoreCase)))
+        {
+            highlight = true;
+        }
+
+        return highlight;
+    }
+
+    class ContactContext
+    {
+        public string ContactAttribute { get; set; }
+        public string WebMobile { get; set; }
+        public string IvrTad { get; set; }
+        public string ConnectCsr1 { get; set; }
+        public string ContactRouting1 { get; set; }
+        public string ConnectCsr2 { get; set; }
+        public string ContactRouting2 { get; set; }
+        public string AsiExternal { get; set; }
+    }
+}
